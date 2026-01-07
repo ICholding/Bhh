@@ -8,13 +8,10 @@ export default {
     extend: {
       colors: {
         'bhh-bg': '#d2d8e2',
-        'bhh-bg-light': '#d1d8e2',
-        'bhh-bg-dark': '#d0d8e3',
-        'bhh-white': '#fafbfd',
-        // Add more from palette
+        'bhh-blue': '#3496D3',
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'], // Assume modern sans
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
