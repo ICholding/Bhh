@@ -7,10 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        'bhh-bg': '#d2d8e2',
+        primary: '#3496d3',
+        secondary: '#d2d8e2',
+        dark: '#1a1a2e',
+        light: '#16213e',
+      },
+      backdropBlur: {
+        glass: '20px',
       },
       fontFamily: {
-        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
