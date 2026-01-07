@@ -8,10 +8,9 @@ export default {
     extend: {
       colors: {
         'bhh-bg': '#d2d8e2',
-        'bhh-blue': '#3496D3',
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
     },
   },
