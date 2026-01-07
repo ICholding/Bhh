@@ -1,0 +1,20 @@
+# BHH Circular Logo Metadata
+# Source: Extracted from UI PNG (1536x1024) and WebP (900x596)
+# Description: Round circular logo with text \"BHH\" for Blessed Hope Healthcare
+# Approximate dimensions: 200x200px scalable SVG
+# Colors: Primary blue circle (#4F46E5 indigo), stroke (#3730A3), text white
+# Font: Sans-serif bold, size 60pt, centered
+# Curves: Perfect circle r=90 cx=100 cy=100 stroke-width=4
+# Positioning: text-anchor middle, dominant-baseline middle
+# Usage: <svg ... /> in React/Next.js
+<svg width=\"200\" height=\"200\" viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\">
+  <defs>
+    <radialGradient id=\"grad\" cx=\"50%\" cy=\"50%\">
+      <stop offset=\"0%\" stop-color=\"#60A5FA\"/>
+      <stop offset=\"70%\" stop-color=\"#3B82F6\"/>
+      <stop offset=\"100%\" stop-color=\"#1D4ED8\"/>
+    </radialGradient>
+  </defs>
+  <circle cx=\"100\" cy=\"100\" r=\"95\" fill=\"url(#grad)\" stroke=\"#1E3A8A\" stroke-width=\"3\" stroke-linecap=\"round\"/>
+  <text x=\"100\" y=\"105\" text-anchor=\"middle\" font-family=\"-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif\" font-size=\"52\" font-weight=\"800\" fill=\"#FFFFFF\" letter-spacing=\"0.05em\" stroke=\"#F8FAFC\" stroke-width=\"0.5\" paint-order=\"stroke\">BHH</text>
+</svg>
