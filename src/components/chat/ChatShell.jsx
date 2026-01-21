@@ -92,7 +92,7 @@ export default function ChatShell({
       <div className="bg-white border-b px-4 py-3">
         <div className="flex items-center gap-3">
           <img 
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+            src=""
             alt="BHH Logo"
             className="w-10 h-10 rounded-xl"
           />

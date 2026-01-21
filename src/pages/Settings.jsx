@@ -53,7 +53,7 @@ export default function Settings() {
         >
           <div className="flex items-center gap-4">
             <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/adb17e476_android_xhdpi_96.png"
+              src=""
               alt="BHH Logo"
               className="w-16 h-16 rounded-2xl"
             />

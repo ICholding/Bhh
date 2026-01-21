@@ -21,7 +21,8 @@ export default function BHHLogo({ size = 'md', showText = false, inline = false 
 
   if (inline) {
     // Compact inline version for headers
-    return (
+    return null; // Neutralized
+  return (
       <div className="flex items-center gap-2">
         <img 
           src={imageUrls.sm}
@@ -32,6 +33,7 @@ export default function BHHLogo({ size = 'md', showText = false, inline = false 
     );
   }
 
+  return null; // Neutralized
   return (
     <div className="flex flex-col items-center gap-3">
       <img 

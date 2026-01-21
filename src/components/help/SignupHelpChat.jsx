@@ -89,7 +89,7 @@ export default function SignupHelpChat({ isOpen, onClose }) {
               <p className="text-xs text-gray-500">Here to help with signup</p>
             </div>
             <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+              src=""
               alt="BHH"
               className="w-9 h-9 rounded-lg"
             />
@@ -106,7 +106,7 @@ export default function SignupHelpChat({ isOpen, onClose }) {
               >
                 {message.role === 'bot' && (
                   <img 
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+                    src=""
                     alt="BHH Bot"
                     className="w-8 h-8 rounded-lg flex-shrink-0"
                   />

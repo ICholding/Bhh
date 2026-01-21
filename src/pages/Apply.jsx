@@ -60,7 +60,7 @@ export default function Apply() {
           className="text-center mb-8"
         >
           <img 
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+            src=""
             alt="BHH Logo"
             className="w-16 h-16 rounded-xl mx-auto mb-4"
           />
