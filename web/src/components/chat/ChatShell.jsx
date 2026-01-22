@@ -4,10 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import MessageBubble from './MessageBubble';
 import QuickActions from './QuickActions';
-import { brandConfig } from '../../config/brand';
 
 export default function ChatShell({ 
-  botName = brandConfig.appName + ' Assistant',
+  botName = 'BHH Assistant',
   botDescription = 'Here to help you',
   quickActions = [],
   initialMessage = "Hello! How can I help you today?",
@@ -93,8 +92,8 @@ export default function ChatShell({
       <div className="bg-white border-b px-4 py-3">
         <div className="flex items-center gap-3">
           <img 
-            src={brandConfig.agentAvatar}
-            alt={brandConfig.appName}
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+            alt="BHH Logo"
             className="w-10 h-10 rounded-xl"
           />
           <div>

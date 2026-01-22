@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Car, Home, Users, Shield, Clock, Phone } from 'lucide-react';
+import { ArrowRight, Heart, Car, Home, Users, Shield, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SiteFooter from '@/components/footer/SiteFooter';
 import ReviewsSlideDrawer from '@/components/reviews/ReviewsSlideDrawer';
-import { brandConfig } from '../config/brand';
 
 export default function Landing() {
   const [reviewsOpen, setReviewsOpen] = useState(false);
@@ -95,7 +94,7 @@ export default function Landing() {
       </section>
 
       {/* Trust Indicators */}
-      <section className="px-4 pb-12">
+      <section className="px-4 pb-20">
         <div className="bg-gradient-to-r from-blue-600 to-teal-500 rounded-3xl p-6 text-white text-center max-w-md mx-auto">
           <div className="flex justify-center gap-8 mb-4">
             <div>
@@ -115,27 +114,6 @@ export default function Landing() {
             <Clock className="w-4 h-4" />
             Available when you need us
           </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="px-4 pb-12">
-        <div className="max-w-md mx-auto">
-          <a 
-            href={`tel:${brandConfig.contactPhone.replace(/\D/g, '')}`}
-            className="flex items-center justify-between p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-600 transition-colors">
-                <Phone className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-medium text-gray-500 mb-0.5">Contact Support</p>
-                <p className="text-lg font-bold text-gray-900">{brandConfig.contactPhone}</p>
-              </div>
-            </div>
-            <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-          </a>
         </div>
       </section>
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Bot, User } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { brandConfig } from '../../config/brand';
 
 export default function MessageBubble({ message }) {
   const isBot = message.role === 'bot';
@@ -14,8 +13,8 @@ export default function MessageBubble({ message }) {
     >
       {isBot && (
         <img 
-          src={brandConfig.agentAvatar}
-          alt={brandConfig.appName}
+          src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+          alt="BHH Bot"
           className="w-8 h-8 rounded-lg flex-shrink-0"
         />
       )}

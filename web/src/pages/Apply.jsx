@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import SignupHelpChat from '@/components/help/SignupHelpChat';
-import { brandConfig } from '../config/brand';
 
 export default function Apply() {
   const navigate = useNavigate();
@@ -61,8 +60,8 @@ export default function Apply() {
           className="text-center mb-8"
         >
           <img 
-            src={brandConfig.logos.md}
-            alt={brandConfig.appName}
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
+            alt="BHH Logo"
             className="w-16 h-16 rounded-xl mx-auto mb-4"
           />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Create Your Account</h1>
