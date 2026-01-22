@@ -6,7 +6,8 @@ import { ArrowLeft, Mail, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { base44 } from '@/api/base44Client';
+import { supabase } from '@/lib/supabaseClient';
+import { SITE_URL } from '@/lib/siteUrl';
 
 export default function PasswordReset() {
   const navigate = useNavigate();
@@ -21,10 +22,21 @@ export default function PasswordReset() {
     setIsLoading(true);
 
     try {
-      await base44.auth.resetPassword(email);
+      // Use Supabase to send password reset email
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${SITE_URL}/ResetPassword`
+      });
+
+      if (resetError) {
+        throw resetError;
+      }
+
+      // Always show success message for security (even if email doesn't exist)
       setIsSubmitted(true);
     } catch (err) {
-      setError(err.message || 'Failed to send reset email. Please try again.');
+      console.error('Password reset error:', err);
+      // Show success anyway for security best practice
+      setIsSubmitted(true);
     } finally {
       setIsLoading(false);
     }

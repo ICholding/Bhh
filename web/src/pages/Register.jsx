@@ -11,6 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import TopHeader from '@/components/branding/TopHeader';
 import StepProgress from '@/components/ui-custom/StepProgress';
 import HelpBanner from '@/components/ui-custom/HelpBanner';
+import { supabase } from '@/lib/supabaseClient';
+import { SITE_URL } from '@/lib/siteUrl';
 
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -32,6 +34,8 @@ export default function Register() {
     lastName: '',
     phone: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     birthMonth: '',
     birthDay: '',
     birthYear: '',
@@ -43,12 +47,16 @@ export default function Register() {
     billingZip: '',
     selectedPlan: 'plus'
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const updateForm = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
+    setError('');
+    
     // If Employee type is selected on Step 1, route to Employee Sign-Up
     if (step === 1 && formData.accountType === 'employee') {
       // Store account data for pre-filling
@@ -66,12 +74,54 @@ export default function Register() {
     }
 
     // Client flow continues normally
-    if (step < 3) setStep(step + 1);
-    else {
-      // Complete registration
-      localStorage.setItem('isSignedIn', 'true');
-      localStorage.setItem('userRole', 'client');
-      navigate(createPageUrl('ServicePortal'));
+    if (step < 3) {
+      setStep(step + 1);
+    } else {
+      // Complete registration with Supabase
+      setIsLoading(true);
+      try {
+        // Sign up user with Supabase
+        const { data, error: signUpError } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            emailRedirectTo: SITE_URL,
+            data: {
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+              phone: formData.phone
+            }
+          }
+        });
+
+        if (signUpError) {
+          throw signUpError;
+        }
+
+        if (data.user) {
+          // Update profile with selected role
+          const { error: profileError } = await supabase
+            .from('profiles')
+            .update({ role: formData.accountType || 'client' })
+            .eq('id', data.user.id);
+
+          if (profileError) {
+            console.error('Error updating profile role:', profileError);
+          }
+
+          // Store for backwards compatibility
+          localStorage.setItem('isSignedIn', 'true');
+          localStorage.setItem('userRole', 'client');
+          
+          // Navigate to service portal
+          navigate(createPageUrl('ServicePortal'));
+        }
+      } catch (err) {
+        console.error('Signup error:', err);
+        setError(err.message || 'Failed to create account. Please try again.');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -179,6 +229,28 @@ export default function Register() {
                     value={formData.email}
                     onChange={(e) => updateForm('email', e.target.value)}
                     placeholder="john@example.com"
+                    className="h-12 rounded-xl w-full"
+                  />
+                </div>
+
+                <div>
+                  <Label className="text-sm text-[#5F7D95] mb-1.5 block">Password *</Label>
+                  <Input
+                    type="password"
+                    value={formData.password}
+                    onChange={(e) => updateForm('password', e.target.value)}
+                    placeholder="••••••••"
+                    className="h-12 rounded-xl w-full"
+                  />
+                </div>
+
+                <div>
+                  <Label className="text-sm text-[#5F7D95] mb-1.5 block">Confirm Password *</Label>
+                  <Input
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={(e) => updateForm('confirmPassword', e.target.value)}
+                    placeholder="••••••••"
                     className="h-12 rounded-xl w-full"
                   />
                 </div>
@@ -382,11 +454,24 @@ export default function Register() {
       {/* Fixed Bottom Button */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-30 max-w-[480px] mx-auto w-full">
         <div className="max-w-full px-4">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm mb-3">
+              {error}
+            </div>
+          )}
           <Button
             onClick={handleNext}
+            disabled={isLoading}
             className="w-full max-w-full h-14 text-lg font-semibold rounded-2xl bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600"
           >
-            {step === 3 ? 'Complete Registration' : `Proceed to Step ${step + 1}`}
+            {isLoading ? (
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>Creating Account...</span>
+              </div>
+            ) : (
+              step === 3 ? 'Complete Registration' : `Proceed to Step ${step + 1}`
+            )}
           </Button>
         </div>
       </div>

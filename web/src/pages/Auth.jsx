@@ -6,6 +6,8 @@ import { ArrowLeft, Eye, EyeOff, Mail, Lock, Shield, Briefcase, Users, Heart } f
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { supabase } from '@/lib/supabaseClient';
+import { useSupabaseAuth } from '@/lib/useSupabaseAuth';
 
 const roleOptions = [
   { value: 'client', label: 'Client', icon: Heart, route: 'ServicePortal' },
@@ -17,6 +19,7 @@ const roleOptions = [
 export default function Auth() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { user, profile, loading } = useSupabaseAuth();
   
   const [selectedRole, setSelectedRole] = useState('client');
   const [showPassword, setShowPassword] = useState(false);
@@ -24,31 +27,45 @@ export default function Auth() {
     email: '',
     password: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    // Check if user is already signed in
-    const storedRole = localStorage.getItem('userRole');
-    const isSignedIn = localStorage.getItem('isSignedIn');
-    
-    if (isSignedIn === 'true' && storedRole) {
-      const roleConfig = roleOptions.find(r => r.value === storedRole);
+    // If user is already authenticated, redirect to appropriate dashboard
+    if (!loading && user && profile) {
+      const roleConfig = roleOptions.find(r => r.value === profile.role);
       if (roleConfig) {
         navigate(createPageUrl(roleConfig.route));
       }
     }
-  }, [navigate]);
+  }, [user, profile, loading, navigate]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError('');
+    setIsLoading(true);
     
-    // Store sign-in state and role
-    localStorage.setItem('isSignedIn', 'true');
-    localStorage.setItem('userRole', selectedRole);
-    
-    // Navigate based on selected role
-    const roleConfig = roleOptions.find(r => r.value === selectedRole);
-    if (roleConfig) {
-      navigate(createPageUrl(roleConfig.route));
+    try {
+      // Sign in with Supabase
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password
+      });
+
+      if (signInError) {
+        throw signInError;
+      }
+
+      // Store selected role for backwards compatibility
+      localStorage.setItem('isSignedIn', 'true');
+      localStorage.setItem('userRole', selectedRole);
+      
+      // Navigation will be handled by useEffect when profile is loaded
+    } catch (err) {
+      console.error('Login error:', err);
+      setError(err.message || 'Failed to sign in. Please check your credentials.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,6 +127,12 @@ export default function Auth() {
 
           {/* Login Form */}
           <form onSubmit={handleLogin} className="space-y-5">
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+                {error}
+              </div>
+            )}
+            
             <div>
               <Label className="text-sm text-gray-600 mb-1.5 block">Email Address</Label>
               <div className="relative">
@@ -120,6 +143,8 @@ export default function Auth() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="your@email.com"
                   className="h-14 pl-12 rounded-xl"
+                  required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -134,6 +159,8 @@ export default function Auth() {
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
                   className="h-14 pl-12 pr-12 rounded-xl"
+                  required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
@@ -146,16 +173,27 @@ export default function Auth() {
             </div>
 
             <div className="text-right">
-              <button type="button" className="text-sm text-blue-600 hover:text-blue-700">
+              <Link 
+                to={createPageUrl('PasswordReset')}
+                className="text-sm text-blue-600 hover:text-blue-700"
+              >
                 Forgot password?
-              </button>
+              </Link>
             </div>
 
             <Button
               type="submit"
+              disabled={isLoading || !formData.email || !formData.password}
               className="w-full h-14 text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600"
             >
-              Sign In
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>Signing In...</span>
+                </div>
+              ) : (
+                'Sign In'
+              )}
             </Button>
           </form>
 
