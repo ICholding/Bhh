@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
+import { brandConfig } from '../config/brand';
 
 const menuItems = [
   { icon: Bell, label: 'Notifications', description: 'Manage alerts' },
@@ -53,8 +54,8 @@ export default function Settings() {
         >
           <div className="flex items-center gap-4">
             <img 
-              src=""
-              alt="BHH Logo"
+              src={brandConfig.logos.sm}
+              alt={brandConfig.appName}
               className="w-16 h-16 rounded-2xl"
             />
             <div className="flex-1">

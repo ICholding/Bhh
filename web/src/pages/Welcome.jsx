@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone, MapPin, Shield, Heart, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { brandConfig } from '../config/brand';
 
 export default function Welcome() {
 
@@ -18,8 +19,8 @@ export default function Welcome() {
       {/* Header */}
       <header className="px-4 pt-6 pb-4">
         <img 
-          src=""
-          alt="BHH Logo"
+          src={brandConfig.logos.sm}
+          alt={brandConfig.appName}
           className="w-12 h-12 rounded-xl mx-auto"
         />
       </header>
@@ -82,45 +83,27 @@ export default function Welcome() {
           
           <div className="space-y-3">
             <a 
-              href="tel:7708913267"
+              href={`tel:${brandConfig.contactPhone.replace(/\D/g, '')}`}
               className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl hover:from-blue-100 hover:to-cyan-100 transition-colors"
             >
               <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
                 <Phone className="w-5 h-5 text-white" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900">Call Us</p>
-                <p className="text-lg font-bold text-blue-600">770-891-3267</p>
+                <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">Phone Support</p>
+                <p className="text-base font-bold text-gray-900">{brandConfig.contactPhone}</p>
               </div>
+              <ArrowRight className="w-5 h-5 text-gray-400" />
             </a>
-
-            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
-              <MapPin className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-gray-700 leading-relaxed">
-                <p className="font-medium">333 Swanson Dr, Suite 114</p>
-                <p>Lawrenceville, GA 30043</p>
-                <p>United States</p>
+            
+            <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100">
+              <div className="w-10 h-10 rounded-lg bg-teal-500 flex items-center justify-center">
+                <MapPin className="w-5 h-5 text-white" />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="px-4 pb-20">
-        <div className="bg-gradient-to-r from-blue-600 to-teal-500 rounded-3xl p-6 text-white text-center max-w-md mx-auto">
-          <div className="flex justify-center gap-8">
-            <div>
-              <p className="text-3xl font-bold">10K+</p>
-              <p className="text-sm text-white/80">Served</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold">4.9</p>
-              <p className="text-sm text-white/80">Rating</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold">24/7</p>
-              <p className="text-sm text-white/80">Support</p>
+              <div className="flex-1">
+                <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">Office Location</p>
+                <p className="text-sm font-semibold text-gray-900">Lawrenceville, GA</p>
+              </div>
             </div>
           </div>
         </div>

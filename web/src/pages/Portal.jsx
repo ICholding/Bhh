@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { Shield, Briefcase, Heart, ArrowRight, Sparkles } from 'lucide-react';
+import { brandConfig } from '../config/brand';
 
 export default function Portal() {
   const portals = [
@@ -40,8 +41,8 @@ export default function Portal() {
       {/* Header */}
       <header className="px-4 pt-8 pb-6 text-center">
         <img 
-          src=""
-          alt="BHH Logo"
+          src={brandConfig.logos.md}
+          alt={brandConfig.appName}
           className="w-14 h-14 rounded-xl mx-auto mb-4"
         />
         <motion.div

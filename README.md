@@ -1,39 +1,22 @@
-**Welcome to your Base44 project** 
+# Blessed Hope Healthcare (BHH) - Full Stack Environment
 
-**About**
+This repository contains the production code for the BHH ecosystem, optimized for sovereign hosting.
 
-View and Edit  your app on [Base44.com](http://Base44.com) 
+## Project Structure
+- **/api**: Express.js Backend with PostgreSQL integration, Log Sinks, and AI Proxying.
+- **/web**: Vite/React Frontend with Supabase Auth and Tailwind CSS.
+- **render.yaml**: Infrastructure-as-code for automated Render deployment.
 
-This project contains everything you need to run your app locally.
+## Deployment Strategy
+1. **Frontend**: Deploys as a Static Site with SPA routing.
+2. **Backend**: Deploys as a Web Service on Node.js.
+3. **Database**: Managed PostgreSQL.
 
-**Edit the code in your local development environment**
+## Core Architecture
+The system uses an **API Shim** strategy. All logic that previously depended on external platforms has been routed to the `/api` service, ensuring data sovereignty and performance stability.
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
+- **Frontend Build**: `npm ci && npm run build`
+- **Backend Start**: `node src/server.js`
 
-**Prerequisites:** 
-
-1. Clone the repository using the project's Git URL 
-2. Navigate to the project directory
-3. Install dependencies: `npm install`
-4. Create an `.env.local` file and set the right environment variables
-
-```
-VITE_BASE44_APP_ID=your_app_id
-VITE_BASE44_APP_BASE_URL=your_backend_url
-
-e.g.
-VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
-VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.base44.app
-```
-
-Run the app: `npm run dev`
-
-**Publish your changes**
-
-Open [Base44.com](http://Base44.com) and click on Publish.
-
-**Docs & Support**
-
-Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
-
-Support: [https://app.base44.com/support](https://app.base44.com/support)
+## Environment Setup
+Ensure `VITE_API_BASE_URL` is set on the frontend to the URL of the backend service.

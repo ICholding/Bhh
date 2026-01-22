@@ -1,15 +1,17 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { brandConfig } from '../../config/brand';
 
 export default function SiteFooter({ onReviewsClick }) {
   return (
     <footer className="bg-[#F7FBFF] border-t border-gray-100 py-8 px-4 mt-12 text-center">
       {/* Company Info */}
       <div className="text-sm text-gray-600 leading-relaxed max-w-md mx-auto mb-6">
-        <p className="font-semibold text-gray-900 mb-2">Blessed Hope Healthcare</p>
+        <p className="font-semibold text-gray-900 mb-2">{brandConfig.appName}</p>
         <p>333 Swanson Dr, Suite 114</p>
         <p>Lawrenceville, GA 30043, United States</p>
-        <p className="mt-2">
+        <p className="mt-1 font-medium text-gray-900">{brandConfig.contactPhone}</p>
+        <p className="mt-1">
           Email:{' '}
           <a 
             href="mailto:bhh@icholding.cloud" 
@@ -37,7 +39,7 @@ export default function SiteFooter({ onReviewsClick }) {
 
       {/* Copyright */}
       <div className="text-xs text-gray-400 mt-6">
-        © {new Date().getFullYear()} Blessed Hope Healthcare. All rights reserved.
+        © {new Date().getFullYear()} {brandConfig.appName}. All rights reserved.
       </div>
     </footer>
   );

@@ -1,197 +1,137 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Send, Bot, User } from 'lucide-react';
+import { X, Send, Bot, User, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { motion, AnimatePresence } from 'framer-motion';
+import { brandConfig } from '../../config/brand';
 
 export default function SignupHelpChat({ isOpen, onClose }) {
   const [messages, setMessages] = useState([
-    { 
-      id: 1, 
-      role: 'bot', 
-      content: "Hi! I can help you sign up, apply as an employee, or answer questions about Blessed Hope Healthcare." 
-    }
+    { id: 1, role: 'bot', content: `Hello! I'm your ${brandConfig.appName} onboarding assistant. How can I help you today?` }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollRef = useRef(null);
 
   useEffect(() => {
-    scrollToBottom();
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages]);
 
-  const quickActions = [
-    "Client signup help",
-    "Employee application help",
-    "Form questions",
-    "Something else"
-  ];
+  const handleSend = () => {
+    if (!input.trim()) return;
 
-  const handleSend = (text = input) => {
-    if (!text.trim()) return;
-    
-    const userMessage = { id: Date.now(), role: 'user', content: text };
-    setMessages(prev => [...prev, userMessage]);
+    const userMsg = { id: Date.now(), role: 'user', content: input };
+    setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
 
-    // Simulate bot response
     setTimeout(() => {
-      let botResponse = "I understand. Let me help you with that.";
-      
-      if (text.toLowerCase().includes('client')) {
-        botResponse = "Great! As a Client, you'll have access to request care services like transportation, grocery delivery, home care, and more. Continue filling out the form above to create your account.";
-      } else if (text.toLowerCase().includes('employee') || text.toLowerCase().includes('worker')) {
-        botResponse = "Wonderful! We're always looking for dedicated caregivers and workers. After you complete this basic form, you'll be directed to our full employment application with additional questions about your experience and availability.";
-      } else if (text.toLowerCase().includes('form') || text.toLowerCase().includes('help')) {
-        botResponse = "I'm happy to help! Please fill in your First Name, Last Name, Email, and Phone number. All fields are required. If you have any specific questions about a field, feel free to ask.";
-      }
-      
-      const botMessage = {
-        id: Date.now() + 1,
-        role: 'bot',
-        content: botResponse
-      };
-      setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1200);
-  };
+      let response = "I've noted your request. A team member will follow up shortly if I can't resolve it here.";
+      const query = input.toLowerCase();
 
-  const handleQuickAction = (action) => {
-    handleSend(action);
+      if (query.includes('phone') || query.includes('call')) {
+        response = `You can reach our support team directly at ${brandConfig.contactPhone}. We're available 24/7.`;
+      } else if (query.includes('email')) {
+        response = "Our support email is bhh@icholding.cloud. Feel free to send us detailed inquiries there.";
+      } else if (query.includes('document') || query.includes('upload')) {
+        response = "You'll be able to upload your required documents in Step 3 of the application process. We accept PDF, JPG, and PNG formats.";
+      }
+
+      setMessages(prev => [...prev, { id: Date.now() + 1, role: 'bot', content: response }]);
+      setIsTyping(false);
+    }, 1000);
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ x: '100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed inset-0 z-50 bg-white flex flex-col"
-        >
-          {/* Header */}
-          <header className="bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3 shadow-sm">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={onClose}
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            <div className="flex-1">
-              <h1 className="text-lg font-semibold text-gray-900">BHH Support Assistant</h1>
-              <p className="text-xs text-gray-500">Here to help with signup</p>
-            </div>
-            <img 
-              src=""
-              alt="BHH"
-              className="w-9 h-9 rounded-lg"
-            />
-          </header>
-
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-            {messages.map(message => (
-              <motion.div
-                key={message.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex items-end gap-2 ${message.role === 'bot' ? 'justify-start' : 'justify-end'}`}
-              >
-                {message.role === 'bot' && (
-                  <img 
-                    src=""
-                    alt="BHH Bot"
-                    className="w-8 h-8 rounded-lg flex-shrink-0"
-                  />
-                )}
-                
-                <div className={`max-w-[75%] rounded-2xl px-4 py-3 ${
-                  message.role === 'bot'
-                    ? 'bg-white shadow-sm border border-gray-100 rounded-bl-md' 
-                    : 'bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-br-md'
-                }`}>
-                  <p className={`text-sm leading-relaxed ${message.role === 'bot' ? 'text-gray-800' : 'text-white'}`}>
-                    {message.content}
-                  </p>
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/20 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            className="bg-white w-full max-w-md h-[500px] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-teal-500 p-4 text-white flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-md">
+                  <Bot className="w-6 h-6" />
                 </div>
-                
-                {message.role === 'user' && (
-                  <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
-                    <User className="w-4 h-4 text-gray-600" />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-            
-            {isTyping && (
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-white" />
-                </div>
-                <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
+                <div>
+                  <h3 className="font-bold">Support Chat</h3>
+                  <p className="text-xs text-blue-100">Online • Active Now</p>
                 </div>
               </div>
-            )}
-            
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Quick Actions */}
-          {messages.length <= 2 && (
-            <div className="px-4 pb-3 bg-gray-50">
-              <p className="text-xs text-gray-500 mb-2">Quick actions:</p>
-              <div className="flex flex-wrap gap-2">
-                {quickActions.map((action, index) => (
-                  <motion.button
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => handleQuickAction(action)}
-                    className="px-4 py-2 bg-white border border-blue-200 rounded-full text-sm text-blue-600 hover:bg-blue-50 hover:border-blue-300 transition-colors active:scale-95"
-                  >
-                    {action}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Input Area */}
-          <div className="bg-white border-t p-4">
-            <form 
-              onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-              className="flex items-center gap-2"
-            >
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your question..."
-                className="flex-1 rounded-full border-gray-200 h-12"
-              />
-              <Button 
-                type="submit" 
-                size="icon"
-                disabled={!input.trim()}
-                className="rounded-full h-12 w-12 bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600"
-              >
-                <Send className="w-5 h-5" />
+              <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-white/10 rounded-full">
+                <X className="w-5 h-5" />
               </Button>
-            </form>
-          </div>
-        </motion.div>
+            </div>
+
+            {/* Messages */}
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+              {messages.map((m) => (
+                <div key={m.id} className={`flex items-start gap-2 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                    m.role === 'bot' ? 'bg-blue-100 text-blue-600' : 'bg-gray-200 text-gray-600'
+                  }`}>
+                    {m.role === 'bot' ? <Bot className="w-5 h-5" /> : <User className="w-5 h-5" />}
+                  </div>
+                  <div className={`p-3 rounded-2xl text-sm max-w-[80%] ${
+                    m.role === 'bot' 
+                      ? 'bg-white shadow-sm border border-gray-100 rounded-tl-none' 
+                      : 'bg-blue-600 text-white rounded-tr-none'
+                  }`}>
+                    {m.content}
+                  </div>
+                </div>
+              ))}
+              {isTyping && (
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 rounded-tl-none">
+                    <div className="flex gap-1">
+                      <div className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Contact Quick Links */}
+            <div className="px-4 py-2 bg-white border-t border-gray-100 flex gap-2">
+              <a href={`tel:${brandConfig.contactPhone.replace(/\D/g, '')}`} className="flex-1 flex items-center justify-center gap-2 p-2 bg-blue-50 text-blue-700 rounded-xl text-xs font-semibold hover:bg-blue-100 transition-colors">
+                <Phone className="w-3.5 h-3.5" />
+                Call Us
+              </a>
+              <a href="mailto:bhh@icholding.cloud" className="flex-1 flex items-center justify-center gap-2 p-2 bg-teal-50 text-teal-700 rounded-xl text-xs font-semibold hover:bg-teal-100 transition-colors">
+                <Mail className="w-3.5 h-3.5" />
+                Email Support
+              </a>
+            </div>
+
+            {/* Input */}
+            <div className="p-4 bg-white border-t border-gray-100">
+              <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
+                <Input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type your message..."
+                  className="rounded-xl border-gray-200"
+                />
+                <Button type="submit" size="icon" disabled={!input.trim()} className="rounded-xl bg-blue-600 hover:bg-blue-700">
+                  <Send className="w-4 h-4" />
+                </Button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

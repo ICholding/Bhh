@@ -63,7 +63,7 @@ const styles = {
     width: "100vw",
     position: "relative",
     overflow: "hidden",
-    backgroundImage: "url(/Blob_Splashpage.png)", transition: "opacity 0.5s ease-in-out",
+    backgroundImage: "url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/ce26c3cbe_2f5a10156_6fbeeaeee_file_00000000936071f5b7d2ecf4d22a9f66.png)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
