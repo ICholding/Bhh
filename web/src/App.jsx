@@ -6,6 +6,7 @@ import { pagesConfig } from './pages.config'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import { SupabaseAuthProvider } from '@/lib/useSupabaseAuth';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import { ChatOverlayProvider } from '@/chat/ChatOverlayProvider';
 import ChatOverlay from '@/chat/ChatOverlay';
@@ -69,18 +70,20 @@ const AuthenticatedApp = () => {
 function App() {
 
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <ChatOverlayProvider>
-          <Router>
-            <NavigationTracker />
-            <AuthenticatedApp />
-            <ChatOverlay />
-          </Router>
-          <Toaster />
-        </ChatOverlayProvider>
-      </QueryClientProvider>
-    </AuthProvider>
+    <SupabaseAuthProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClientInstance}>
+          <ChatOverlayProvider>
+            <Router>
+              <NavigationTracker />
+              <AuthenticatedApp />
+              <ChatOverlay />
+            </Router>
+            <Toaster />
+          </ChatOverlayProvider>
+        </QueryClientProvider>
+      </AuthProvider>
+    </SupabaseAuthProvider>
   )
 }
 

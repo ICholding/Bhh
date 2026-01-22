@@ -1,6 +1,10 @@
 #env
 .env
-.env.*
+.env.local
+.env.*.local
+
+# Allow .env.example to be committed
+!.env.example
 
 # Logs
 logs
