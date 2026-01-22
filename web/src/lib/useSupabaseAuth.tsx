@@ -30,6 +30,9 @@ interface SupabaseAuthProviderProps {
   children: ReactNode;
 }
 
+// PostgreSQL error code for "no rows returned"
+const PGRST_NO_ROWS_ERROR = 'PGRST116';
+
 export const SupabaseAuthProvider = ({ children }: SupabaseAuthProviderProps) => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
@@ -46,7 +49,7 @@ export const SupabaseAuthProvider = ({ children }: SupabaseAuthProviderProps) =>
 
       if (error) {
         // If profile doesn't exist, create it defensively
-        if (error.code === 'PGRST116') {
+        if (error.code === PGRST_NO_ROWS_ERROR) {
           console.log('Profile not found, creating new profile...');
           const { data: newProfile, error: createError } = await supabase
             .from('profiles')

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Eye, EyeOff, Mail, Lock, Shield, Briefcase, Users, Heart } from 'lucide-react';
@@ -56,10 +57,6 @@ export default function Auth() {
         throw signInError;
       }
 
-      // Store selected role for backwards compatibility
-      localStorage.setItem('isSignedIn', 'true');
-      localStorage.setItem('userRole', selectedRole);
-      
       // Navigation will be handled by useEffect when profile is loaded
     } catch (err) {
       console.error('Login error:', err);

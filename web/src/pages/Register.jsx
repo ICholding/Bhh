@@ -57,6 +57,22 @@ export default function Register() {
   const handleNext = async () => {
     setError('');
     
+    // Validate passwords on step 1
+    if (step === 1 && formData.accountType === 'client') {
+      if (!formData.password) {
+        setError('Password is required');
+        return;
+      }
+      if (formData.password.length < 6) {
+        setError('Password must be at least 6 characters long');
+        return;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match');
+        return;
+      }
+    }
+    
     // If Employee type is selected on Step 1, route to Employee Sign-Up
     if (step === 1 && formData.accountType === 'employee') {
       // Store account data for pre-filling
@@ -109,9 +125,9 @@ export default function Register() {
             console.error('Error updating profile role:', profileError);
           }
 
-          // Store for backwards compatibility
+          // Store for backwards compatibility with actual role
           localStorage.setItem('isSignedIn', 'true');
-          localStorage.setItem('userRole', 'client');
+          localStorage.setItem('userRole', formData.accountType || 'client');
           
           // Navigate to service portal
           navigate(createPageUrl('ServicePortal'));
