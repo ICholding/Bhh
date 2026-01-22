@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Check, User, Mail, Phone, Briefcase, MessageSquare, Sparkles } from 'lucide-react';
+import { ArrowLeft, Check, User, Briefcase, MessageSquare, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function ApplyStep4() {

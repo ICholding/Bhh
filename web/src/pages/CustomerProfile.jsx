@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, User, Mail, Phone, Calendar, MapPin, Clock, CheckCircle, LogOut, Star } from 'lucide-react';
+import { ArrowLeft, User, Mail, Phone, Calendar, MapPin, CheckCircle, LogOut, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ServiceFeedbackModal from '@/components/reviews/ServiceFeedbackModal';
 

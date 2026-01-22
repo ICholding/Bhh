@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Calendar, MapPin, Clock, Check, X, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Calendar, Clock, MessageCircle } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TopHeader from '@/components/branding/TopHeader';
 import DailyScheduleView from '@/components/schedule/DailyScheduleView';

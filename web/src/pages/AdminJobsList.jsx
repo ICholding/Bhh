@@ -6,7 +6,7 @@ import { base44 } from '@/api/base44Client';
 import { ArrowLeft, Briefcase, Calendar, MapPin, User, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { format } from 'date-fns';
 
 export default function AdminJobsList() {

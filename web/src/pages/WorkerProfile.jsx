@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, User, Mail, Phone, Briefcase, Clock, CheckCircle, Star, LogOut } from 'lucide-react';
+import { ArrowLeft, User, Mail, Phone, Briefcase, CheckCircle, Star, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import WorkerReviews from '@/components/reviews/WorkerReviews';

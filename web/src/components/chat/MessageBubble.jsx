@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bot, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 
@@ -29,16 +29,16 @@ export default function MessageBubble({ message }) {
           <ReactMarkdown
             components={{
               // Customize rendering to avoid security issues
-              a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" />,
-              code: ({ node, inline, ...props }) => 
+              a: ({ node: _node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" />,
+              code: ({ node: _node, inline, ...props }) => 
                 inline 
                   ? <code {...props} className="bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-xs" />
                   : <code {...props} className="block bg-gray-100 text-gray-800 p-2 rounded-lg text-xs overflow-x-auto" />,
-              p: ({ node, ...props }) => <p {...props} className="mb-2 last:mb-0" />,
-              ul: ({ node, ...props }) => <ul {...props} className="list-disc list-inside mb-2" />,
-              ol: ({ node, ...props }) => <ol {...props} className="list-decimal list-inside mb-2" />,
-              strong: ({ node, ...props }) => <strong {...props} className="font-semibold" />,
-              em: ({ node, ...props }) => <em {...props} className="italic" />,
+              p: ({ node: _node, ...props }) => <p {...props} className="mb-2 last:mb-0" />,
+              ul: ({ node: _node, ...props }) => <ul {...props} className="list-disc list-inside mb-2" />,
+              ol: ({ node: _node, ...props }) => <ol {...props} className="list-decimal list-inside mb-2" />,
+              strong: ({ node: _node, ...props }) => <strong {...props} className="font-semibold" />,
+              em: ({ node: _node, ...props }) => <em {...props} className="italic" />,
             }}
           >
             {message.content}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { ArrowLeft, FileText, AlertCircle, Clock, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowLeft, FileText, CheckCircle2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import ConvertToJobWizard from '@/components/jobs/ConvertToJobWizard';

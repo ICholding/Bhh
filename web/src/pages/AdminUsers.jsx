@@ -4,12 +4,10 @@ import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, 
-  Search, 
-  Filter,
+  Search,
   User,
   Briefcase,
   Mail,
-  Phone,
   MoreVertical,
   Sparkles,
   AlertTriangle,

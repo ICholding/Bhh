@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
@@ -7,10 +7,7 @@ import {
   MessageCircle, 
   User, 
   HeadphonesIcon,
-  Bell,
-  Clock,
   Calendar,
-  ChevronRight,
   LogOut
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';

@@ -3,7 +3,6 @@ import { X, Download, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { format } from 'date-fns';
 
 export default function PayoutReportModal({ isOpen, onClose, payouts }) {
   const [reportType, setReportType] = useState('summary');

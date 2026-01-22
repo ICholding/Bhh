@@ -2,7 +2,6 @@ import React from 'react';
 import { format, startOfWeek, addDays, isSameDay } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import JobCard from './JobCard';
 
 export default function WeeklyScheduleView({ jobs, selectedDate, onDateChange }) {
   const weekStart = startOfWeek(selectedDate, { weekStartsOn: 0 });
