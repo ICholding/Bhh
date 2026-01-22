@@ -4,8 +4,6 @@ import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield, Briefcase, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
 
 export default function ApplyStep2() {
   const navigate = useNavigate();

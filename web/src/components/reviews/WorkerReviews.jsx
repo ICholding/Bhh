@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, MessageSquare } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 export default function WorkerReviews({ workerId }) {
   // Mock reviews data - in real app, fetch from ServiceReview entity filtered by worker_id

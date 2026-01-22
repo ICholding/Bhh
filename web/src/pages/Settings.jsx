@@ -1,10 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
-  User, 
   Bell, 
   Shield, 
   CreditCard,

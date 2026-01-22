@@ -27,6 +27,7 @@ import EmployeeSchedule from './pages/EmployeeSchedule';
 import EmployeeSignup from './pages/EmployeeSignup';
 import Landing from './pages/Landing';
 import Messages from './pages/Messages';
+import PasswordReset from './pages/PasswordReset';
 import Portal from './pages/Portal';
 import Register from './pages/Register';
 import ServicePortal from './pages/ServicePortal';
@@ -70,6 +71,7 @@ export const PAGES = {
     "EmployeeSignup": EmployeeSignup,
     "Landing": Landing,
     "Messages": Messages,
+    "PasswordReset": PasswordReset,
     "Portal": Portal,
     "Register": Register,
     "ServicePortal": ServicePortal,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, User, MapPin, Clock, Star, Award, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Sparkles, MapPin, Clock, Star, Award, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function AIWorkerMatching() {

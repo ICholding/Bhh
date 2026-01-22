@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, User, Mail, Shield, TrendingUp, Users, Briefcase, Calendar, LogOut } from 'lucide-react';
+import { ArrowLeft, Mail, Shield, TrendingUp, Users, Briefcase, Calendar, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function AdminProfile() {
