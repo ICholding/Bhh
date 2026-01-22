@@ -1,6 +1,7 @@
 import React from 'react';
 import { Bot, User } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export default function MessageBubble({ message }) {
   const isBot = message.role === 'bot';
@@ -24,9 +25,25 @@ export default function MessageBubble({ message }) {
           ? 'bg-white shadow-sm border border-gray-100 rounded-bl-md' 
           : 'bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-br-md'
       }`}>
-        <p className={`text-sm leading-relaxed ${isBot ? 'text-gray-800' : 'text-white'}`}>
-          {message.content}
-        </p>
+        <div className={`text-sm leading-relaxed ${isBot ? 'text-gray-800' : 'text-white'} prose prose-sm max-w-none ${!isBot && 'prose-invert'}`}>
+          <ReactMarkdown
+            components={{
+              // Customize rendering to avoid security issues
+              a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" />,
+              code: ({ node, inline, ...props }) => 
+                inline 
+                  ? <code {...props} className="bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-xs" />
+                  : <code {...props} className="block bg-gray-100 text-gray-800 p-2 rounded-lg text-xs overflow-x-auto" />,
+              p: ({ node, ...props }) => <p {...props} className="mb-2 last:mb-0" />,
+              ul: ({ node, ...props }) => <ul {...props} className="list-disc list-inside mb-2" />,
+              ol: ({ node, ...props }) => <ol {...props} className="list-decimal list-inside mb-2" />,
+              strong: ({ node, ...props }) => <strong {...props} className="font-semibold" />,
+              em: ({ node, ...props }) => <em {...props} className="italic" />,
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
+        </div>
       </div>
       
       {!isBot && (
