@@ -67,3 +67,52 @@ To apply the Supabase database migrations:
 
 Alternatively, run the SQL in `/supabase/migrations/0001_profiles_rls.sql` directly in the Supabase SQL Editor.
 
+## Android Build (Mobile App)
+
+The BHH app can be built as an Android APK using Capacitor.
+
+### Prerequisites
+- Node.js and npm installed
+- Android Studio with Android SDK installed
+- Java 17 or higher
+
+### Building the Android App
+
+#### First-Time Setup
+```bash
+# Navigate to web directory
+cd web
+
+# Install dependencies (including Capacitor)
+npm install
+
+# Run initialization script
+chmod +x scripts/init-android.sh
+./scripts/init-android.sh
+```
+
+#### Subsequent Builds
+```bash
+# Build and sync web assets to Android
+cd web
+npm run build:android
+
+# Build the APK
+cd android
+./gradlew assembleDebug
+```
+
+The generated APK will be located at:
+```
+web/android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+### Available Capacitor Commands
+- `npm run cap:init` - Initialize Capacitor
+- `npm run cap:add:android` - Add Android platform
+- `npm run cap:sync` - Sync web assets with native platforms
+- `npm run cap:copy` - Copy web assets to native platforms
+- `npm run build:android` - Build web and sync to Android
+
+**Note**: The `android/` directory is generated and should not be committed to git (already in .gitignore).
+
