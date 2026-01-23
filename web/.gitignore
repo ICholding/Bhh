@@ -31,5 +31,5 @@ dist-ssr
 *.sln
 *.sw?
 
-.envandroid/
+android/
 ios/

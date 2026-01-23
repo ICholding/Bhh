@@ -31,5 +31,5 @@ dist-ssr
 *.sln
 *.sw?
 
-.envnode_modules/
+node_modules/
 dist/
