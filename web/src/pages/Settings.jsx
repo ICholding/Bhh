@@ -50,11 +50,6 @@ export default function Settings() {
           className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
         >
           <div className="flex items-center gap-4">
-            <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/adb17e476_android_xhdpi_96.png"
-              alt="BHH Logo"
-              className="w-16 h-16 rounded-2xl"
-            />
             <div className="flex-1">
               <h2 className="text-lg font-semibold text-gray-900">John Doe</h2>
               <p className="text-sm text-gray-500">Member since 2024</p>

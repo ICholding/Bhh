@@ -15,14 +15,6 @@ export default function Welcome() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-cyan-50 overflow-x-hidden">
-      {/* Header */}
-      <header className="px-4 pt-6 pb-4">
-        <img 
-          src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696b80034c7e55964cb716d5/6585f39cc_chat_avatar_48.png"
-          alt="BHH Logo"
-          className="w-12 h-12 rounded-xl mx-auto"
-        />
-      </header>
 
       {/* Hero */}
       <section className="px-6 pt-8 pb-12 text-center">
